@@ -1,52 +1,113 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Учёт торговли</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram WebApp</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background: #111; color: #eee; }
-        input, button { display: block; margin-top: 10px; width: 100%; padding: 10px; border-radius: 6px; border: none; }
-        input { background: #222; color: #fff; }
-        button { background: #4CAF50; color: white; font-weight: bold; cursor: pointer; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Верхняя часть с закругленными углами */
+        .top-section {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            text-align: center;
+            flex: 0 1 100px;
+        }
+
+        /* Средняя часть для графика */
+        .chart-section {
+            background-color: #f4f4f4;
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Контейнер для кнопок */
+        .button-section {
+            background-color: #ffffff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex: 0 1 100px;
+        }
+
+        .button-section button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        .button-section button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Нижняя часть с кнопками */
+        .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #333;
+        }
+
+        .bottom-section button {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        .bottom-section button:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
-    <h2>Учёт торговли</h2>
-    <input type="date" id="date" placeholder="Дата">
-    <input type="number" id="trades" placeholder="Количество сделок">
-    <input type="number" id="profit" placeholder="Прибыль">
-    <input type="number" id="profitPerTrade" placeholder="Прибыль на сделку">
-    <input type="number" id="positionSize" placeholder="Размер позиции">
-    <input type="number" id="depositAdd" placeholder="Пополнение">
-    <input type="number" id="depositWithdraw" placeholder="Снятие">
-    <input type="number" id="deposit" placeholder="Общий депозит">
-    <input type="number" id="botPayment" placeholder="Оплата бота">
-    <button onclick="submitData()">Сохранить</button>
 
-    <script>
-        function submitData() {
-            const data = {
-                date: document.getElementById('date').value,
-                trades: document.getElementById('trades').value,
-                profit: document.getElementById('profit').value,
-                profitPerTrade: document.getElementById('profitPerTrade').value,
-                positionSize: document.getElementById('positionSize').value,
-                depositAdd: document.getElementById('depositAdd').value,
-                depositWithdraw: document.getElementById('depositWithdraw').value,
-                deposit: document.getElementById('deposit').value,
-                botPayment: document.getElementById('botPayment').value
-            };
-            fetch('https://script.google.com/macros/s/AKfycbxuSbjSgb0rtWv3a8rCltAX1rrhNsqJg7L0aQ5eEEHV67kMuNqsGWJ4oiGG2v6QQgIRIA/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            alert("Данные отправлены!");
-        }
-    </script>
+    <!-- Верхняя часть -->
+    <div class="top-section">
+        <h2>Статистика торгового бота</h2>
+    </div>
+
+    <!-- Средняя часть с графиком -->
+    <div class="chart-section">
+        <div style="width: 80%; height: 300px; background-color: #ccc; border-radius: 10px;">
+            <!-- Здесь будет заглушка для графика -->
+            <p style="text-align: center; line-height: 300px;">График</p>
+        </div>
+    </div>
+
+    <!-- Кнопки под графиком -->
+    <div class="button-section">
+        <button>Кнопка 1</button>
+        <button>Кнопка 2</button>
+    </div>
+
+    <!-- Нижняя часть с кнопками -->
+    <div class="bottom-section">
+        <button>Кнопка 3</button>
+        <button>Кнопка 4</button>
+        <button>Кнопка 5</button>
+    </div>
+
 </body>
 </html>
