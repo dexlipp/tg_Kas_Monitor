@@ -1,113 +1,108 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram WebApp</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
+import { useState } from 'react';
 
-        /* Верхняя часть с закругленными углами */
-        .top-section {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            text-align: center;
-            flex: 0 1 100px;
-        }
+const CryptoPortfolio = () => {
+  const [activeTab, setActiveTab] = useState('Аналитика');
 
-        /* Средняя часть для графика */
-        .chart-section {
-            background-color: #f4f4f4;
-            flex: 1 1 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Контейнер для кнопок */
-        .button-section {
-            background-color: #ffffff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            flex: 0 1 100px;
-        }
-
-        .button-section button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            flex-grow: 1;
-        }
-
-        .button-section button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Нижняя часть с кнопками */
-        .bottom-section {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            background-color: #333;
-        }
-
-        .bottom-section button {
-            background-color: #444;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            flex-grow: 1;
-        }
-
-        .bottom-section button:hover {
-            background-color: #555;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Верхняя часть -->
-    <div class="top-section">
-        <h2>Статистика торгового бота</h2>
-    </div>
-
-    <!-- Средняя часть с графиком -->
-    <div class="chart-section">
-        <div style="width: 80%; height: 300px; background-color: #ccc; border-radius: 10px;">
-            <!-- Здесь будет заглушка для графика -->
-            <p style="text-align: center; line-height: 300px;">График</p>
+  return (
+    <div className="bg-black text-white min-h-screen p-4">
+      <header className="flex justify-between items-center mb-4">
+        <h1 className="text-lg font-bold">Все Портфолио</h1>
+        <div className="flex items-center space-x-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
+            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
+            <path d="M12 5v14M5 12h14"></path>
+          </svg>
         </div>
-    </div>
+      </header>
 
-    <!-- Кнопки под графиком -->
-    <div class="button-section">
-        <button>Кнопка 1</button>
-        <button>Кнопка 2</button>
-    </div>
+      <div className="bg-gray-900 rounded-lg p-4 mb-4">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-bold">CryptoCrew</h2>
+          <div className="bg-blue-500 rounded-full w-6 h-6 flex items-center justify-center">
+            <span className="text-sm">C</span>
+          </div>
+        </div>
+        <h3 className="text-xl font-bold mb-2">Скрыто</h3>
+        <div className="bg-gray-800 rounded-lg p-4 mb-4">
+          <LineChart />
+        </div>
+        <div className="flex space-x-4 mb-4">
+          <button
+            className={`flex-1 py-2 rounded-lg ${activeTab === 'Аналитика' ? 'bg-gray-700' : 'bg-gray-800'}`}
+            onClick={() => setActiveTab('Аналитика')}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6 mx-auto mb-1">
+              <path d="M12 7v10M7 12h10"></path>
+            </svg>
+            <span>Аналитика</span>
+          </button>
+          <button
+            className={`flex-1 py-2 rounded-lg ${activeTab === 'История' ? 'bg-gray-700' : 'bg-gray-800'}`}
+            onClick={() => setActiveTab('История')}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6 mx-auto mb-1">
+              <path d="M12 7v10M7 12h10"></path>
+            </svg>
+            <span>История</span>
+          </button>
+        </div>
+        <div className="flex space-x-4 mb-4 overflow-x-auto">
+          {['24H', '7D', '1M', '3M', '6M', '1Y', 'Ytd', 'All'].map((tab) => (
+            <button key={tab} className="py-2 px-4 rounded-lg bg-gray-800">
+              {tab}
+            </button>
+          ))}
+        </div>
+        <div className="flex justify-between mb-4">
+          <span className="text-sm">Актив/Кол-во</span>
+          <span className="text-sm">Текущий P&L</span>
+          <span className="text-sm">Инвестировано / Ср...</span>
+        </div>
+        <div className="space-y-4">
+          {['ZKJ', 'MX', 'ATOM', 'DOT', 'ETH'].map((asset) => (
+            <div key={asset} className="flex justify-between py-2 border-b border-gray-700">
+              <div className="flex items-center space-x-2">
+                <div className="w-6 h-6 bg-gray-700 rounded-full"></div>
+                <span>{asset}</span>
+              </div>
+              <div className="flex space-x-2">
+                {[1, 2, 3].map((dot) => (
+                  <div key={dot} className="w-1 h-1 bg-gray-500 rounded-full"></div>
+                ))}
+              </div>
+              <div className="flex space-x-2">
+                {[1, 2, 3].map((dot) => (
+                  <div key={dot} className="w-1 h-1 bg-gray-500 rounded-full"></div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-    <!-- Нижняя часть с кнопками -->
-    <div class="bottom-section">
-        <button>Кнопка 3</button>
-        <button>Кнопка 4</button>
-        <button>Кнопка 5</button>
-    </div>
+      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-around">
+        {[1, 2, 3].map((icon) => (
+          <svg key={icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
+            <path d="M12 7v10M7 12h10"></path>
+          </svg>
+        ))}
+      </div>
 
-</body>
-</html>
+      <button className="fixed bottom-20 right-4 bg-blue-500 rounded-full w-12 h-12 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+      </button>
+    </div>
+  );
+};
+
+const LineChart = () => (
+  <svg viewBox="0 0 400 200" className="w-full h-48">
+    <path d="M0 200L40 180L80 160L120 140L160 120L200 100L240 80L280 60L320 40L360 20L400 0" stroke="green" strokeWidth="2" fill="none" />
+  </svg>
+);
+
+export default CryptoPortfolio;
